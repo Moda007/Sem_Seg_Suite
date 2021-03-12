@@ -27,9 +27,11 @@ from __future__ import print_function
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
-from from frontends import inception_utils
+from frontends import inception_utils
 
-slim = import tf_slim as slim
+import tf_slim
+
+slim = tf_slim
 
 
 def block_inception_a(inputs, scope=None, reuse=None):

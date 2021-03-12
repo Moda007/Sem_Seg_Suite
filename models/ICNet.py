@@ -2,7 +2,7 @@ import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 from tensorflow.contrib import slim
 import numpy as np
-from from frontends import frontend_builder
+from frontends import frontend_builder
 import os, sys
 
 def Upsampling_by_shape(inputs, feature_map_shape):

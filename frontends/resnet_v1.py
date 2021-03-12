@@ -1,7 +1,7 @@
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 from tensorflow.contrib import slim
-from from frontends import resnet_utils
+from frontends import resnet_utils
 
 resnet_arg_scope = resnet_utils.resnet_arg_scope
 

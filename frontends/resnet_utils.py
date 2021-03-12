@@ -41,7 +41,9 @@ import collections
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
-slim = import tf_slim as slim
+import tf_slim
+
+slim = tf_slim
 
 
 class Block(collections.namedtuple('Block', ['scope', 'unit_fn', 'args'])):
