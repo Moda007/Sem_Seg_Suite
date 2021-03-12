@@ -210,7 +210,7 @@ for epoch in range(args.epoch_start_i, args.num_epochs):
 
     # Create directories if needed
     if not os.path.isdir("%s%s/%04d"%(main_dir, "checkpoints", epoch)):
-        os.makedirs("%s/%04d"%("checkpoints",epoch))
+        os.makedirs("%s%s/%04d"%(main_dir, "checkpoints", epoch))
 
     # Save latest checkpoint to same file name
     print("Saving latest checkpoint")
