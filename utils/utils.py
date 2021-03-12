@@ -2,7 +2,7 @@ from __future__ import print_function, division
 import os,time,cv2, sys, math
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
-import tensorflow.contrib.slim as slim
+import tf.contrib.slim as slim
 import numpy as np
 import time, datetime
 import os, random
