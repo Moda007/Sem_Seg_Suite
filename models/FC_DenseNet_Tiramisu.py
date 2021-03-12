@@ -3,7 +3,7 @@ import os,time,cv2
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior().contrib.slim as slim
+import tf_slim as slim
 import numpy as np
 
 def preact_conv(inputs, n_filters, kernel_size=[3, 3], dropout_p=0.2):
@@ -96,7 +96,7 @@ def build_fc_densenet(inputs, num_classes, preset_model='FC-DenseNet56', n_filte
       growth_rate=16
       n_layers_per_block=[4, 5, 7, 10, 12, 15, 12, 10, 7, 5, 4]
     else:
-      raise ValueError("Unsupported FC-DenseNet model '%s'. This function only supports FC-DenseNet56, FC-DenseNet67, and FC-DenseNet103" % (preset_model)) 
+      raise ValueError("Unsupported FC-DenseNet model '%s'. This function only supports FC-DenseNet56, FC-DenseNet67, and FC-DenseNet103" % (preset_model))
 
     if type(n_layers_per_block) == list:
         assert (len(n_layers_per_block) == 2 * n_pool + 1)
@@ -114,7 +114,7 @@ def build_fc_densenet(inputs, num_classes, preset_model='FC-DenseNet56', n_filte
       stack = slim.conv2d(inputs, n_filters_first_conv, [3, 3], scope='first_conv', activation_fn=None)
 
       n_filters = n_filters_first_conv
-      
+
       #####################
       # Downsampling path #
       #####################

@@ -2,7 +2,7 @@ import os,time,cv2
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior().contrib.slim as slim
+import tf_slim as slim
 import numpy as np
 
 def ConvBlock(inputs, n_filters, kernel_size=[3, 3]):
