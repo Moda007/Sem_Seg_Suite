@@ -1,6 +1,6 @@
 import os,time,cv2, sys, math
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior() as tf
+tf.disable_v2_behavior()
 import argparse
 import numpy as np
 

@@ -1,7 +1,7 @@
 # coding=utf-8
 
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior() as tf
+tf.disable_v2_behavior()
 from tensorflow.contrib import slim
 import numpy as np
 from Sem_Seg_Suite.builders import frontend_builder

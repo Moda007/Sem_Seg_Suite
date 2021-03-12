@@ -4,7 +4,7 @@ import itertools
 import operator
 import os, csv
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior() as tf
+tf.disable_v2_behavior()
 
 import time, datetime
 

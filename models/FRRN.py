@@ -1,5 +1,5 @@
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior() as tf
+tf.disable_v2_behavior()
 from tensorflow.contrib import slim
 
 def Upsampling(inputs,scale):

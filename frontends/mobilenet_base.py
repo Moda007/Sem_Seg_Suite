@@ -23,7 +23,7 @@ import copy
 import os
 
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior() as tf
+tf.disable_v2_behavior()
 
 
 slim = tf.contrib.slim

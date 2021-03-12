@@ -1,7 +1,7 @@
 from __future__ import division
 import os,time,cv2
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior() as tf
+tf.disable_v2_behavior()
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior().contrib.slim as slim
 import numpy as np

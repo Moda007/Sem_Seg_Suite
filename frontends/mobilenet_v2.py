@@ -28,7 +28,7 @@ import copy
 import functools
 
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior() as tf
+tf.disable_v2_behavior()
 
 from from Sem_Seg_Suite.frontends import conv_blocks as ops
 from from Sem_Seg_Suite.frontends import mobilenet_base as lib
