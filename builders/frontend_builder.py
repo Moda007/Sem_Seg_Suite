@@ -1,9 +1,9 @@
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 from tensorflow.contrib import slim
-from from Sem_Seg_Suite.frontends import resnet_v2
-from from Sem_Seg_Suite.frontends import mobilenet_v2
-from from Sem_Seg_Suite.frontends import inception_v4
+from from frontends import resnet_v2
+from from frontends import mobilenet_v2
+from from frontends import inception_v4
 import os 
 
 

@@ -30,10 +30,10 @@ import functools
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
-from from Sem_Seg_Suite.frontends import conv_blocks as ops
-from from Sem_Seg_Suite.frontends import mobilenet_base as lib
+from from frontends import conv_blocks as ops
+from from frontends import mobilenet_base as lib
 
-slim = tf.contrib.slim
+slim = import tf_slim as slim
 op = lib.op
 
 expand_input = ops.expand_input_by_factor
@@ -98,7 +98,7 @@ def mobilenet(input_tensor,
   Inference mode is created by default. To create training use training_scope
   below.
 
-  with tf.contrib.slim.arg_scope(mobilenet_v2.training_scope()):
+  with import tf_slim as slim.arg_scope(mobilenet_v2.training_scope()):
      logits, endpoints = mobilenet_v2.mobilenet(input_tensor)
 
   Args:
@@ -184,7 +184,7 @@ def training_scope(**kwargs):
   """Defines MobilenetV2 training scope.
 
   Usage:
-     with tf.contrib.slim.arg_scope(mobilenet_v2.training_scope()):
+     with import tf_slim as slim.arg_scope(mobilenet_v2.training_scope()):
        logits, endpoints = mobilenet_v2.mobilenet(input_tensor)
 
   with slim.

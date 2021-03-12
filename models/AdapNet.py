@@ -4,7 +4,7 @@ import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 from tensorflow.contrib import slim
 import numpy as np
-from Sem_Seg_Suite.frontends import resnet_v2
+from frontends import resnet_v2
 import os, sys
 
 

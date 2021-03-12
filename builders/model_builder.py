@@ -4,20 +4,20 @@ tf.disable_v2_behavior()
 import subprocess
 
 sys.path.append("models")
-from from Sem_Seg_Suite.models.FC_DenseNet_Tiramisu import build_fc_densenet
-from from Sem_Seg_Suite.models.Encoder_Decoder import build_encoder_decoder
-from from Sem_Seg_Suite.models.RefineNet import build_refinenet
-from from Sem_Seg_Suite.models.FRRN import build_frrn
-from from Sem_Seg_Suite.models.MobileUNet import build_mobile_unet
-from from Sem_Seg_Suite.models.PSPNet import build_pspnet
-from from Sem_Seg_Suite.models.GCN import build_gcn
-from from Sem_Seg_Suite.models.DeepLabV3 import build_deeplabv3
-from from Sem_Seg_Suite.models.DeepLabV3_plus import build_deeplabv3_plus
-from from Sem_Seg_Suite.models.AdapNet import build_adaptnet
-from from Sem_Seg_Suite.models.custom_model import build_custom
-from from Sem_Seg_Suite.models.DenseASPP import build_dense_aspp
-from from Sem_Seg_Suite.models.DDSC import build_ddsc
-from from Sem_Seg_Suite.models.BiSeNet import build_bisenet
+from from models.FC_DenseNet_Tiramisu import build_fc_densenet
+from from models.Encoder_Decoder import build_encoder_decoder
+from from models.RefineNet import build_refinenet
+from from models.FRRN import build_frrn
+from from models.MobileUNet import build_mobile_unet
+from from models.PSPNet import build_pspnet
+from from models.GCN import build_gcn
+from from models.DeepLabV3 import build_deeplabv3
+from from models.DeepLabV3_plus import build_deeplabv3_plus
+from from models.AdapNet import build_adaptnet
+from from models.custom_model import build_custom
+from from models.DenseASPP import build_dense_aspp
+from from models.DDSC import build_ddsc
+from from models.BiSeNet import build_bisenet
 
 SUPPORTED_MODELS = ["FC-DenseNet56", "FC-DenseNet67", "FC-DenseNet103", "Encoder-Decoder", "Encoder-Decoder-Skip", "RefineNet",
     "FRRN-A", "FRRN-B", "MobileUNet", "MobileUNet-Skip", "PSPNet", "GCN", "DeepLabV3", "DeepLabV3_plus", "AdapNet", 

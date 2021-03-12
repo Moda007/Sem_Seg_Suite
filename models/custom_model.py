@@ -5,7 +5,7 @@ tf.disable_v2_behavior()
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior().contrib.slim as slim
 import numpy as np
-from Sem_Seg_Suite.builders import frontend_builder
+from builders import frontend_builder
 
 def conv_block(inputs, n_filters, filter_size=[3, 3], dropout_p=0.0):
 	"""

@@ -28,7 +28,7 @@ The key difference of the full preactivation 'v2' variant compared to the
 
 Typical use:
 
-   from tf.contrib.slim.nets import resnet_v2
+   from import tf_slim as slim.nets import resnet_v2
 
 ResNet-101 for image classification into 1000 classes:
 
@@ -53,9 +53,9 @@ from __future__ import print_function
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
-from from Sem_Seg_Suite.frontends import resnet_utils
+from from frontends import resnet_utils
 
-slim = tf.contrib.slim
+slim = import tf_slim as slim
 resnet_arg_scope = resnet_utils.resnet_arg_scope
 
 

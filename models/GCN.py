@@ -1,7 +1,7 @@
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 from tensorflow.contrib import slim
-from Sem_Seg_Suite.builders import frontend_builder
+from builders import frontend_builder
 import os, sys
 
 def Upsampling(inputs,scale):

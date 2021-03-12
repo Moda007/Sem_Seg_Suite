@@ -4,8 +4,8 @@ tf.disable_v2_behavior()
 import argparse
 import numpy as np
 
-from Sem_Seg_Suite.utils import utils, helpers
-from Sem_Seg_Suite.builders import model_builder
+from utils import utils, helpers
+from builders import model_builder
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--checkpoint_path', type=str, default=None, required=True, help='The path to the latest checkpoint weights for your model.')

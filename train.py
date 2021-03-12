@@ -2,7 +2,7 @@ from __future__ import print_function
 import os,time,cv2, sys, math
 import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
-import tf.contrib.slim as slim
+import import tf_slim as slim as slim
 import numpy as np
 import time, datetime
 import argparse
@@ -15,8 +15,8 @@ import subprocess
 import matplotlib
 matplotlib.use('Agg')
 
-from Sem_Seg_Suite.utils import utils, helpers
-from Sem_Seg_Suite.builders import model_builder
+from utils import utils, helpers
+from builders import model_builder
 
 import matplotlib.pyplot as plt
 
