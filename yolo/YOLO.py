@@ -15,13 +15,13 @@ class YOLO:
         self.boxes = []
 
     def Detect(self):
-        net = LoadYolo()
-        classes = ParseClasses()
-        output_layers = DefineLayers(net)
-        ReadImage()
-        outs = ExtratFeat(net, output_layers)
-        boxes, indexes = ObjDetection(outs)
-        DrawBoxes(boxes, indexes)
+        net = self.LoadYolo()
+        classes = self.ParseClasses()
+        output_layers = self.DefineLayers(net)
+        self.ReadImage()
+        outs = self.ExtratFeat(net, output_layers)
+        boxes, indexes = self.ObjDetection(outs)
+        self.DrawBoxes(boxes, indexes)
 
 
     def LoadYolo(self):
