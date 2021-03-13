@@ -54,7 +54,7 @@ train_input_names,train_output_names, val_input_names, val_output_names, test_in
 if not os.path.isdir("%s%s"%(main_dir, "Test")):
         os.makedirs("%s%s"%(main_dir, "Test"))
 
-target=open("%s/test_scores.csv"%("Test"),'w')
+target=open("%s/test_scores.csv"%("/content/drive/MyDrive/Thesis/ModelTraining/Test"),'w')
 target.write("test_name, test_accuracy, precision, recall, f1 score, mean iou, %s\n" % (class_names_string))
 scores_list = []
 class_scores_list = []

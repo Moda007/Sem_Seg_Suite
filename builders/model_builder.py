@@ -20,18 +20,18 @@ from models.DDSC import build_ddsc
 from models.BiSeNet import build_bisenet
 
 SUPPORTED_MODELS = ["FC-DenseNet56", "FC-DenseNet67", "FC-DenseNet103", "Encoder-Decoder", "Encoder-Decoder-Skip", "RefineNet",
-    "FRRN-A", "FRRN-B", "MobileUNet", "MobileUNet-Skip", "PSPNet", "GCN", "DeepLabV3", "DeepLabV3_plus", "AdapNet", 
+    "FRRN-A", "FRRN-B", "MobileUNet", "MobileUNet-Skip", "PSPNet", "GCN", "DeepLabV3", "DeepLabV3_plus", "AdapNet",
     "DenseASPP", "DDSC", "BiSeNet", "custom"]
 
 SUPPORTED_FRONTENDS = ["ResNet50", "ResNet101", "ResNet152", "MobileNetV2", "InceptionV4"]
 
 def download_checkpoints(model_name):
-    subprocess.check_output(["python", "utils/get_pretrained_checkpoints.py", "--model=" + model_name])
+    subprocess.check_output(["python", "/content/Sem_Seg_Suite/utils/get_pretrained_checkpoints.py", "--model=" + model_name])
 
 
 
 def build_model(model_name, net_input, num_classes, crop_width, crop_height, frontend="ResNet101", is_training=True):
-	# Get the selected model. 
+	# Get the selected model.
 	# Some of them require pre-trained ResNet
 
 	print("Preparing the model ...")
@@ -51,7 +51,7 @@ def build_model(model_name, net_input, num_classes, crop_width, crop_height, fro
 	if "MobileNetV2" == frontend and not os.path.isfile("models/mobilenet_v2.ckpt.data-00000-of-00001"):
 	    download_checkpoints("MobileNetV2")
 	if "InceptionV4" == frontend and not os.path.isfile("models/inception_v4.ckpt"):
-	    download_checkpoints("InceptionV4") 
+	    download_checkpoints("InceptionV4")
 
 	network = None
 	init_fn = None
