@@ -26,7 +26,7 @@ class YOLO:
 
     def LoadYolo(self):
         #Load YOLO Algorithm
-        net=cv2.dnn.readNet(self.Cfg)
+        net=cv2.dnn.readNet(self.Weights, self.Cfg)
         return net
 
     def ParseClasses(self):
