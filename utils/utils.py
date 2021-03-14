@@ -303,3 +303,14 @@ def memory():
     py = psutil.Process(pid)
     memoryUse = py.memory_info()[0]/2.**30  # Memory use in GB
     print('Memory usage in GBs:', memoryUse)
+
+#Create final mask
+def create_final_mask(segmented_img, boxes):
+    for idx, box_data in enumerate(boxes):
+        x, y, w, h = box_data
+        mask = segmented_img[y:y+h, x:x+w, 0]
+        box = np.zeros((mask.shape[0], mask.shape[1]))
+        IoU = compute_mean_iou(mask.flatten(), box.flatten())
+        if IoU < 0.5:
+            segmented_img[y:y+h, x:x+w, :] = 0.
+    return segmented_img
