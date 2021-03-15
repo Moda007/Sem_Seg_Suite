@@ -306,11 +306,18 @@ def memory():
 
 #Create final mask
 def create_final_mask(segmented_img, boxes):
+    segmented_img_dim = segmented_img.ndim
     for idx, box_data in enumerate(boxes):
         x, y, w, h = box_data
-        mask = segmented_img[y:y+h, x:x+w, 0]
+        if segmented_img_dim == 3:
+            mask = segmented_img[y:y+h, x:x+w, 0]
+        else:
+            mask = segmented_img[y:y+h, x:x+w]
         box = np.zeros((mask.shape[0], mask.shape[1]))
         IoU = compute_mean_iou(mask.flatten(), box.flatten())
         if IoU < 0.5:
-            segmented_img[y:y+h, x:x+w, :] = 0.
+            if segmented_img_dim == 3:
+                segmented_img[y:y+h, x:x+w, :] = 0.
+            else:
+                segmented_img[y:y+h, x:x+w] = 0.
     return segmented_img

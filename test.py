@@ -22,6 +22,35 @@ parser.add_argument('--yolo_cfg', type=str, default='/content/Sem_Seg_Suite/yolo
 parser.add_argument('--coco_names', type=str, default='/content/Sem_Seg_Suite/yolo/coco.names', help='COCO dataset classes file directory')
 args = parser.parse_args()
 
+#Define useful functions
+def write_to_target(target, file_name, class_accuracies, accuracy, prec, rec, f1, iou):
+    target.write("%s, %f, %f, %f, %f, %f"%(file_name, accuracy, prec, rec, f1, iou))
+    for item in class_accuracies:
+        target.write(", %f"%(item))
+    target.write("\n")
+
+def calculate_avg(scores_list, class_scores_list, precision_list, recall_list, f1_list, iou_list, run_times_list, score_title = 'Seg Mask Results'):
+    avg_score = np.mean(scores_list)
+    class_avg_scores = np.mean(class_scores_list, axis=0)
+    avg_precision = np.mean(precision_list)
+    avg_recall = np.mean(recall_list)
+    avg_f1 = np.mean(f1_list)
+    avg_iou = np.mean(iou_list)
+    avg_time = np.mean(run_times_list)
+    print('====================')
+    print(score_title)
+    print("Average test accuracy = ", avg_score)
+    print("Average per class test accuracies = \n")
+    for index, item in enumerate(class_avg_scores):
+        print("%s = %f" % (class_names_list[index], item))
+    print("Average precision = ", avg_precision)
+    print("Average recall = ", avg_recall)
+    print("Average F1 score = ", avg_f1)
+    print("Average mean IoU score = ", avg_iou)
+    print("Average run time = ", avg_time)
+
+    return avg_score, class_avg_scores, avg_precision, avg_recall, avg_f1, avg_iou
+
 # Get the names of the classes so we can record the evaluation results
 print("Retrieving dataset information ...")
 class_names_list, label_values = helpers.get_label_info(os.path.join(args.dataset, "class_dict.csv"))
@@ -63,7 +92,7 @@ if not os.path.isdir("%s%s"%(main_dir, "Test")):
 target=open("%s/test_scores.csv"%("/content/drive/MyDrive/Thesis/ModelTraining/Test"),'w')
 target.write("test_name, test_accuracy, precision, recall, f1 score, mean iou, %s\n" % (class_names_string))
 scores_list = []
-class_scores_list = [], []
+class_scores_list = []
 precision_list = []
 recall_list = []
 f1_list = []
@@ -71,7 +100,7 @@ iou_list = []
 run_times_list = []
 
 if args.yolo:
-    full_mask_target=open("%s/test_scoresfull_mask.csv"%("/content/drive/MyDrive/Thesis/ModelTraining/Test"),'w')
+    full_mask_target=open("%s/test_scores_full_mask.csv"%("/content/drive/MyDrive/Thesis/ModelTraining/Test"),'w')
     full_mask_target.write("test_name, test_accuracy, precision, recall, f1 score, mean iou, %s\n" % (class_names_string))
     full_mask_scores_list = []
     full_mask_class_scores_list = []
@@ -94,7 +123,8 @@ for ind in range(len(test_input_names)):
     st = time.time()
     output_image = sess.run(network,feed_dict={net_input:input_image})
 
-    run_times_list.append(time.time()-st)
+    run_time = time.time()-st
+    run_times_list.append(run_time)
 
     output_image = np.array(output_image[0,:,:,:])
     output_image = helpers.reverse_one_hot(output_image)
@@ -116,21 +146,36 @@ for ind in range(len(test_input_names)):
     f1_list.append(f1)
     iou_list.append(iou)
 
-    gt = helpers.colour_code_segmentation(gt, label_values)
+    gt_vis = helpers.colour_code_segmentation(gt, label_values)
 
     cv2.imwrite("%s/%s_pred.png"%("Test", file_name),cv2.cvtColor(np.uint8(out_vis_image), cv2.COLOR_RGB2BGR))
-    cv2.imwrite("%s/%s_gt.png"%("Test", file_name),cv2.cvtColor(np.uint8(gt), cv2.COLOR_RGB2BGR))
+    cv2.imwrite("%s/%s_gt.png"%("Test", file_name),cv2.cvtColor(np.uint8(gt_vis), cv2.COLOR_RGB2BGR))
 
     if args.yolo:
-        yolo_boxes = YOLO(args.yolo_weights, args.yolo_cfg, args.coco_names, image).boxes
+        full_mask_st = time.time()
+        YOLO_obj = YOLO(args.yolo_weights, args.yolo_cfg, args.coco_names, image)
+        YOLO_obj.Detect()
+        yolo_boxes = YOLO_obj.boxes
         full_mask_image = utils.create_final_mask(output_image, yolo_boxes)
 
+        full_mask_run_time = time.time()-full_mask_st
+        full_mask_run_times_list.append(full_mask_run_time)
+
+        # One layer is enough for evaluation (Binary mask)
         full_mask_accuracy, full_mask_class_accuracies, full_mask_prec, full_mask_rec, full_mask_f1, full_mask_iou = \
         utils.evaluate_segmentation(pred=full_mask_image, label=gt, num_classes=num_classes)
 
         write_to_target(full_mask_target, file_name, full_mask_class_accuracies, full_mask_accuracy, full_mask_prec, \
                         full_mask_rec, full_mask_f1, full_mask_iou)
-        cv2.imwrite("%s/%s_full_mask.png"%("Test", file_name))
+
+        full_mask_scores_list.append(full_mask_accuracy)
+        full_mask_class_scores_list.append(full_mask_class_accuracies)
+        full_mask_precision_list.append(full_mask_prec)
+        full_mask_recall_list.append(full_mask_rec)
+        full_mask_f1_list.append(full_mask_f1)
+        full_mask_iou_list.append(full_mask_iou)
+
+        cv2.imwrite("%s/%s_full_mask.png"%("Test", file_name), full_mask_image)
         # full_mask_target.write("%s, %f, %f, %f, %f, %f"%(file_name, full_mask_accuracy, full_mask_prec, \
         #                                                 full_mask_rec, full_mask_f1, full_mask_iou))
         # for item in full_mask_class_accuracies:
@@ -139,12 +184,39 @@ for ind in range(len(test_input_names)):
 
 
 target.close()
+avg_score, class_avg_scores, avg_precision, avg_recall, avg_f1, avg_iou = \
 calculate_avg(scores_list, class_scores_list, precision_list, recall_list, f1_list, iou_list, run_times_list)
 
 if args.yolo:
+    full_mask_avg_score, full_mask_class_avg_scores, full_mask_avg_precision, full_mask_avg_recall, full_mask_avg_f1, full_mask_avg_iou = \
     calculate_avg(full_mask_scores_list, full_mask_class_scores_list, full_mask_precision_list, full_mask_recall_list, \
                 full_mask_f1_list, full_mask_iou_list, full_mask_run_times_list, 'Full Mask Results')
     full_mask_target.close()
+
+    acc_diff = full_mask_avg_score - avg_score
+    acc_imp = (acc_diff/avg_score) * 100
+    map_acc_diff = full_mask_class_avg_scores[0] - class_avg_scores[0]
+    map_acc_imp = (map_acc_diff/class_avg_scores[0]) * 100
+    obj_acc_diff = full_mask_class_avg_scores[1] - class_avg_scores[1]
+    obj_acc_imp = (obj_acc_diff/class_avg_scores[1]) * 100
+    prec_diff = full_mask_avg_precision - avg_precision
+    prec_imp = (prec_diff/avg_precision) * 100
+    rec_diff = full_mask_avg_recall - avg_recall
+    rec_imp = (rec_diff/avg_recall) * 100
+    f1_diff = full_mask_avg_f1 - avg_f1
+    f1_imp = (f1_diff/avg_f1) * 100
+    iou_diff = full_mask_avg_iou - avg_iou
+    iou_imp = (iou_diff/avg_iou) * 100
+
+    print("\n==== Comparison ====\t(difference),\t\t\t(improvement perc %)")
+    print(f"Prediction accuracy\t=> ({acc_diff}),\t({acc_imp} %)")
+    print("Per class prediction accuracies:")
+    print(f"Map\t\t\t=> ({map_acc_diff}),\t({map_acc_imp} %)")
+    print(f"Object\t\t\t=> ({obj_acc_diff}),\t({obj_acc_imp} %)")
+    print(f"Precision\t\t=> ({prec_diff}),\t({prec_imp} %)")
+    print(f"Recall\t\t\t=> ({rec_diff}),\t({rec_imp} %)")
+    print(f"F1 score\t\t=> ({f1_diff}),\t({f1_imp} %)")
+    print(f"IoU score\t\t=> ({iou_diff}),\t({iou_imp} %)")
 
 # avg_score = np.mean(scores_list)
 # class_avg_scores = np.mean(class_scores_list, axis=0)
@@ -162,30 +234,3 @@ if args.yolo:
 # print("Average F1 score = ", avg_f1)
 # print("Average mean IoU score = ", avg_iou)
 # print("Average run time = ", avg_time)
-
-
-def write_to_target(target, file_name, class_accuracies, accuracy, prec, rec, f1, iou):
-    target.write("%s, %f, %f, %f, %f, %f"%(file_name, accuracy, prec, rec, f1, iou))
-    for item in class_accuracies:
-        target.write(", %f"%(item))
-    target.write("\n")
-
-def calculate_avg(scores_list, class_scores_list, precision_list, recall_list, f1_list, iou_list, run_times_list, score_title = 'Seg Mask Results'):
-    avg_score = np.mean(scores_list)
-    class_avg_scores = np.mean(class_scores_list, axis=0)
-    avg_precision = np.mean(precision_list)
-    avg_recall = np.mean(recall_list)
-    avg_f1 = np.mean(f1_list)
-    avg_iou = np.mean(iou_list)
-    avg_time = np.mean(run_times_list)
-    print('====================')
-    print(score_title)
-    print("Average test accuracy = ", avg_score)
-    print("Average per class test accuracies = \n")
-    for index, item in enumerate(class_avg_scores):
-        print("%s = %f" % (class_names_list[index], item))
-    print("Average precision = ", avg_precision)
-    print("Average recall = ", avg_recall)
-    print("Average F1 score = ", avg_f1)
-    print("Average mean IoU score = ", avg_iou)
-    print("Average run time = ", avg_time)
