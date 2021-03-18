@@ -47,6 +47,7 @@ parser.add_argument('--rotation', type=float, default=True, help='Whether to ran
 parser.add_argument('--model', type=str, default="FC-DenseNet103", help='The model you are using. See model_builder.py for supported models')
 parser.add_argument('--frontend', type=str, default="ResNet101", help='The frontend you are using. See frontend_builder.py for supported models')
 parser.add_argument('--main_dir', type=str, default="/content/drive/MyDrive/Thesis/ModelTraining/", help='The main dir where the training outcome will be saved')
+parser.add_argument('--custom_dir', type=str, default="", help='Add custom directory (e.g Google Colab)')
 args = parser.parse_args()
 
 
@@ -75,7 +76,8 @@ def data_augmentation(input_image, output_image):
 
 
 # Get the names of the classes so we can record the evaluation results
-class_names_list, label_values = helpers.get_label_info(os.path.join(args.dataset, "class_dict.csv"))
+DS_dir = args.custom_dir + args.dataset
+class_names_list, label_values = helpers.get_label_info(os.path.join(DS_dir, "class_dict.csv"))
 class_names_string = ""
 for class_name in class_names_list:
     if not class_name == class_names_list[-1]:
@@ -119,7 +121,7 @@ if args.continue_training:
 
 # Load the data
 print("Loading the data ...")
-train_input_names,train_output_names, val_input_names, val_output_names, test_input_names, test_output_names = utils.prepare_data(dataset_dir=args.dataset)
+train_input_names,train_output_names, val_input_names, val_output_names, test_input_names, test_output_names = utils.prepare_data(dataset_dir=DS_dir)
 
 
 
