@@ -197,10 +197,10 @@ if args.yolo:
 
     acc_diff = full_mask_avg_score - avg_score
     acc_imp = (acc_diff/avg_score) * 100
-    map_acc_diff = full_mask_class_avg_scores[0] - class_avg_scores[0]
-    map_acc_imp = (map_acc_diff/class_avg_scores[0]) * 100
-    obj_acc_diff = full_mask_class_avg_scores[1] - class_avg_scores[1]
-    obj_acc_imp = (obj_acc_diff/class_avg_scores[1]) * 100
+    map_acc_diff = full_mask_class_avg_scores[1] - class_avg_scores[1]
+    map_acc_imp = (map_acc_diff/class_avg_scores[1]) * 100
+    obj_acc_diff = full_mask_class_avg_scores[0] - class_avg_scores[0]
+    obj_acc_imp = (obj_acc_diff/class_avg_scores[0]) * 100
     prec_diff = full_mask_avg_precision - avg_precision
     prec_imp = (prec_diff/avg_precision) * 100
     rec_diff = full_mask_avg_recall - avg_recall
@@ -213,8 +213,8 @@ if args.yolo:
     print("\n==== Comparison ====\t(difference),\t\t\t(improvement perc %)")
     print(f"Prediction accuracy\t=> ({acc_diff}),\t({acc_imp} %)")
     print("Per class prediction accuracies:")
-    print(f"Map\t\t\t=> ({map_acc_diff}),\t({map_acc_imp} %)")
     print(f"Object\t\t\t=> ({obj_acc_diff}),\t({obj_acc_imp} %)")
+    print(f"Map\t\t\t=> ({map_acc_diff}),\t({map_acc_imp} %)")
     print(f"Precision\t\t=> ({prec_diff}),\t({prec_imp} %)")
     print(f"Recall\t\t\t=> ({rec_diff}),\t({rec_imp} %)")
     print(f"F1 score\t\t=> ({f1_diff}),\t({f1_imp} %)")
