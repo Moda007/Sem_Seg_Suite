@@ -114,7 +114,7 @@ if init_fn is not None:
 
 # Load a previous checkpoint if desired
 main_dir = args.main_dir
-model_checkpoint_name = main_dir + "checkpoints/latest_model_" + args.model + "_" + args.dataset + ".ckpt"
+model_checkpoint_name = main_dir + "checkpoints/latest_model_" + args.model + "_" + args.dataset + "/.ckpt"
 if args.continue_training:
     print('Loaded latest model checkpoint')
     saver.restore(sess, model_checkpoint_name)

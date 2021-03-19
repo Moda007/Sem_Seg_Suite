@@ -20,6 +20,7 @@ parser.add_argument('--yolo', type=bool, default=True, help='If YOLO is used in 
 parser.add_argument('--yolo_weights', type=str, default='/content/Sem_Seg_Suite/yolo/yolov3.weights', help='YOLO pretrained weights directory')
 parser.add_argument('--yolo_cfg', type=str, default='/content/Sem_Seg_Suite/yolo/yolov3.cfg', help='YOLO pretrained cfg file directory')
 parser.add_argument('--coco_names', type=str, default='/content/Sem_Seg_Suite/yolo/coco.names', help='COCO dataset classes file directory')
+parser.add_argument('--custom_dir', type=str, default="", help='Add custom directory (e.g Google Colab)')
 args = parser.parse_args()
 
 #Define useful functions
@@ -52,8 +53,9 @@ def calculate_avg(scores_list, class_scores_list, precision_list, recall_list, f
     return avg_score, class_avg_scores, avg_precision, avg_recall, avg_f1, avg_iou
 
 # Get the names of the classes so we can record the evaluation results
+DS_dir = args.custom_dir + args.dataset
 print("Retrieving dataset information ...")
-class_names_list, label_values = helpers.get_label_info(os.path.join(args.dataset, "class_dict.csv"))
+class_names_list, label_values = helpers.get_label_info(os.path.join(DS_dir, "class_dict.csv"))
 class_names_string = ""
 for class_name in class_names_list:
     if not class_name == class_names_list[-1]:
@@ -83,7 +85,7 @@ main_dir = args.main_dir
 
 # Load the data
 print("Loading the data ...")
-train_input_names,train_output_names, val_input_names, val_output_names, test_input_names, test_output_names = utils.prepare_data(dataset_dir=args.dataset)
+train_input_names,train_output_names, val_input_names, val_output_names, test_input_names, test_output_names = utils.prepare_data(dataset_dir=DS_dir)
 
 # Create directories if needed
 if not os.path.isdir("%s%s"%(main_dir, "Test")):
