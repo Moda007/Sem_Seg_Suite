@@ -85,7 +85,7 @@ main_dir = args.main_dir
 
 # Load the data
 print("Loading the data ...")
-train_input_names,train_output_names, val_input_names, val_output_names, test_input_names, test_output_names = utils.prepare_data(dataset_dir=DS_dir)
+_, _, _, _, test_input_names, test_output_names = utils.prepare_data(dataset_dir=DS_dir)
 
 # Create directories if needed
 if not os.path.isdir("%s%s"%(main_dir, "Test")):
@@ -117,7 +117,7 @@ for ind in range(len(test_input_names)):
     sys.stdout.write("\rRunning test image %d / %d"%(ind+1, len(test_input_names)))
     sys.stdout.flush()
 
-    image = np.float32(utils.load_image(test_input_names[ind])[:args.crop_height, :args.crop_width])
+    image = cv2.resize(np.float32(utils.load_image(test_input_names[ind])), (args.crop_width, args.crop_height))
     input_image = np.expand_dims(image, axis=0)/255.0
     gt = utils.load_image(test_output_names[ind])[:args.crop_height, :args.crop_width]
     gt = helpers.reverse_one_hot(helpers.one_hot_it(gt, label_values))
