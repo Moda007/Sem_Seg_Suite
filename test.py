@@ -119,7 +119,7 @@ for ind in range(len(test_input_names)):
 
     image = cv2.resize(np.float32(utils.load_image(test_input_names[ind])), (args.crop_width, args.crop_height))
     input_image = np.expand_dims(image, axis=0)/255.0
-    gt = utils.load_image(test_output_names[ind])[:args.crop_height, :args.crop_width]
+    gt = cv2.resize(utils.load_image(test_output_names[ind]), (args.crop_width, args.crop_height))
     gt = helpers.reverse_one_hot(helpers.one_hot_it(gt, label_values))
 
     st = time.time()
