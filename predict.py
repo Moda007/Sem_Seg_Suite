@@ -26,8 +26,8 @@ args = parser.parse_args()
 def visualize_results(accuracy, class_accuracies, prec, rec, f1, iou, run_time):
     print("Prediction accuracy = ", accuracy)
     print("Per class prediction accuracies =")
-    print(f"Map\t= {class_accuracies[0]}")
-    print(f"Object\t= {class_accuracies[1]}")
+    print(f"Object\t= {class_accuracies[0]}")
+    print(f"Map\t= {class_accuracies[1]}")
     print("Precision = ", prec)
     print("Recall = ", rec)
     print("F1 score = ", f1)
@@ -120,10 +120,10 @@ if args.yolo:
 
         acc_diff = full_mask_accuracy - accuracy
         acc_imp = (acc_diff/accuracy) * 100
-        map_acc_diff = full_mask_class_accuracies[0] - class_accuracies[0]
-        map_acc_imp = (map_acc_diff/class_accuracies[0]) * 100
-        obj_acc_diff = full_mask_class_accuracies[1] - class_accuracies[1]
-        obj_acc_imp = (obj_acc_diff/class_accuracies[1]) * 100
+        map_acc_diff = full_mask_class_accuracies[1] - class_accuracies[1]
+        map_acc_imp = (map_acc_diff/class_accuracies[1]) * 100
+        obj_acc_diff = full_mask_class_accuracies[0] - class_accuracies[0]
+        obj_acc_imp = (obj_acc_diff/class_accuracies[0]) * 100
         prec_diff = full_mask_prec - prec
         prec_imp = (prec_diff/prec) * 100
         rec_diff = full_mask_rec - rec
@@ -136,8 +136,8 @@ if args.yolo:
         print("\n==== Comparison ====\t(difference),\t\t\t(improvement perc %)")
         print(f"Prediction accuracy\t=> ({acc_diff}),\t({acc_imp} %)")
         print("Per class prediction accuracies:")
-        print(f"Map\t\t\t=> ({map_acc_diff}),\t({map_acc_imp} %)")
         print(f"Object\t\t\t=> ({obj_acc_diff}),\t({obj_acc_imp} %)")
+        print(f"Map\t\t\t=> ({map_acc_diff}),\t({map_acc_imp} %)")
         print(f"Precision\t\t=> ({prec_diff}),\t({prec_imp} %)")
         print(f"Recall\t\t\t=> ({rec_diff}),\t({rec_imp} %)")
         print(f"F1 score\t\t=> ({f1_diff}),\t({f1_imp} %)")
