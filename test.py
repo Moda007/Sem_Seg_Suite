@@ -21,6 +21,7 @@ parser.add_argument('--yolo_weights', type=str, default='/content/Sem_Seg_Suite/
 parser.add_argument('--yolo_cfg', type=str, default='/content/Sem_Seg_Suite/yolo/yolov3.cfg', help='YOLO pretrained cfg file directory')
 parser.add_argument('--coco_names', type=str, default='/content/Sem_Seg_Suite/yolo/coco.names', help='COCO dataset classes file directory')
 parser.add_argument('--custom_dir', type=str, default="", help='Add custom directory (e.g Google Colab)')
+parser.add_argument('--Alpha', type=float32, default=0.5, help='IoU threshold to create Final Mask')
 args = parser.parse_args()
 
 #Define useful functions
@@ -158,7 +159,7 @@ for ind in range(len(test_input_names)):
         YOLO_obj = YOLO(args.yolo_weights, args.yolo_cfg, args.coco_names, image)
         YOLO_obj.Detect()
         yolo_boxes = YOLO_obj.boxes
-        full_mask_image = utils.create_final_mask(output_image, yolo_boxes)
+        full_mask_image = utils.create_final_mask(output_image, yolo_boxes, args.Alpha)
 
         full_mask_run_time = time.time()-full_mask_st
         full_mask_run_times_list.append(full_mask_run_time)
