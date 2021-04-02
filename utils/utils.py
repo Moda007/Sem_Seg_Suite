@@ -305,7 +305,7 @@ def memory():
     print('Memory usage in GBs:', memoryUse)
 
 #Create final mask
-def create_final_mask(segmented_img, boxes, Alpha=0.5):
+def create_final_mask(segmented_img, boxes, Alpha):
     segmented_img_dim = segmented_img.ndim
     for idx, box_data in enumerate(boxes):
         x, y, w, h = box_data
