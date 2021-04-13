@@ -14,6 +14,7 @@ parser.add_argument('--image', type=str, default=None, required=True, help='The 
 parser.add_argument('--gt_image', type=str, default='', help='The GT image you want to evaluate on. ')
 parser.add_argument('--checkpoint_path', type=str, default=None, required=True, help='The path to the latest checkpoint weights for your model.')
 parser.add_argument('--custom_dir', type=str, default="", help='Add custom directory (e.g Google Colab)')
+parser.add_argument('--crop_height', type=int, default=720, help='Height of cropped input image to network')
 parser.add_argument('--crop_width', type=int, default=960, help='Width of cropped input image to network')
 parser.add_argument('--model', type=str, default=None, required=True, help='The model you are using')
 parser.add_argument('--dataset', type=str, default="CamVid/", required=False, help='The dataset you are using')
