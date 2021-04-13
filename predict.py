@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--image', type=str, default=None, required=True, help='The image you want to predict on. ')
 parser.add_argument('--gt_image', type=str, default='', help='The GT image you want to evaluate on. ')
 parser.add_argument('--checkpoint_path', type=str, default=None, required=True, help='The path to the latest checkpoint weights for your model.')
-parser.add_argument('--crop_height', type=int, default=720, help='Height of cropped input image to network')
+parser.add_argument('--custom_dir', type=str, default="", help='Add custom directory (e.g Google Colab)')
 parser.add_argument('--crop_width', type=int, default=960, help='Width of cropped input image to network')
 parser.add_argument('--model', type=str, default=None, required=True, help='The model you are using')
 parser.add_argument('--dataset', type=str, default="CamVid/", required=False, help='The dataset you are using')
@@ -21,7 +21,7 @@ parser.add_argument('--yolo', type=bool, default=True, help='If YOLO is used in 
 parser.add_argument('--yolo_weights', type=str, default='/content/Sem_Seg_Suite/yolo/yolov3.weights', help='YOLO pretrained weights directory')
 parser.add_argument('--yolo_cfg', type=str, default='/content/Sem_Seg_Suite/yolo/yolov3.cfg', help='YOLO pretrained cfg file directory')
 parser.add_argument('--coco_names', type=str, default='/content/Sem_Seg_Suite/yolo/coco.names', help='COCO dataset classes file directory')
-parser.add_argument('--Alpha', type=float32, default=0.5, help='IoU threshold to create Final Mask')
+parser.add_argument('--Alpha', type=float, default=0.5, help='IoU threshold to create Final Mask')
 args = parser.parse_args()
 
 def visualize_results(accuracy, class_accuracies, prec, rec, f1, iou, run_time):
@@ -35,7 +35,8 @@ def visualize_results(accuracy, class_accuracies, prec, rec, f1, iou, run_time):
     print("IoU score = ", iou)
     print("Run time = ", run_time)
 
-class_names_list, label_values = helpers.get_label_info(os.path.join(args.dataset, "class_dict.csv"))
+DS_dir = args.custom_dir + args.dataset
+class_names_list, label_values = helpers.get_label_info(os.path.join(DS_dir, "class_dict.csv"))
 
 num_classes = len(label_values)
 
