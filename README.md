@@ -1,6 +1,6 @@
 # Static Map Filter
 
-This repo contains the code implementation for my MSc thesis: *** Static-dynamic segmentation of image sequences via deep learning ***
+This repo contains the code implementation for my MSc thesis: _* Static-dynamic segmentation of image sequences via deep learning *_
 
 > Thesis report will be published after discussion and graduation.
 
@@ -29,7 +29,7 @@ The pipeline consists of three main blocks along with the pipeline entry and exi
      <td>Model architecture</td>
   </tr>
   <tr>
-    <td><img src="./Images/model_arch.png" height=210 /></td>
+    <td><img src="./Images/model_arch.png" /></td>
   </tr>
 </table>
 
@@ -42,7 +42,7 @@ The dataset labels were converted to binary version (_White: static elemnts, Bla
 
 <table>
   <tr>
-     <td>First, second, and third columns contains input, multi-calsses original label, and binary (generated) original label, respectively.</td>
+     <td>First column: inputimage, Second column: multi-calsses original label, Third columns binary (generated) original label.</td>
   </tr>
   <tr>
     <td><img src="./Images/cam_vid.png" height=210 /></td>
@@ -62,20 +62,12 @@ The overall results show noticeable improvement for the "Mask accuracy"* with ac
 <table>
   <tr>
      <td>Mask Accuracy Improvement</td>
-  </tr>
-  <tr>
      <td>Map Accuracy Improvement</td>
-  </tr>
- <tr>
      <td>Average Mask and Map Accuracy Improvement</td>
   </tr>
   <tr>
     <td><img src="./Images/mask_box_plot.png" height=210 /></td>
-  </tr>
- <tr>
     <td><img src="./Images/map_box_plot.png" height=210 /></td>
-  </tr>
- <tr>
     <td><img src="./Images/bar_plot.png" height=210 /></td>
   </tr>
 </table>
