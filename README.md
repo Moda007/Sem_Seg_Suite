@@ -3,6 +3,7 @@
 This repo contains the code implementation for my MSc thesis: *** Static-dynamic segmentation of image sequences via deep learning ***
 
 > Thesis report will be published after discussion and graduation.
+
 > Note : Segmentation models and YOLOv3 code implementations are partially inherited from _https://github.com/GeorgeSeif/Semantic-Segmentation-Suite_ and _https://tinyurl.com/3jrjzzvn_ respectively.
 
 ## Objective
@@ -55,6 +56,7 @@ The used models are _PSPNET_, _DeepLabV3+_, and _DenseASPP_.
 ## Results:
 The overall results show noticeable improvement for the "Mask accuracy"* with acceptable degredation of the "Map accuracy"* , which led to cleaner and finer produced masks.
 >* Each pixel in the image is either classified as a static or a quasi-static pixel. "Mask accuracy" evaluates how good is the mask in terms of detecting the quasi static (dynamic) objects, while "Map accuracy" measures the amount of information collected from the scene.
+
 > "Mask accuracy" is the main KPI , due to the criticality of committing type II error by the model.
 
 <table>
@@ -80,8 +82,3 @@ The overall results show noticeable improvement for the "Mask accuracy"* with ac
 
 # License
 <a href="./LICENSE">MIT License</a>.
-
-
-
- 
-
