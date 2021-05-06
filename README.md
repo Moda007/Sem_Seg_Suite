@@ -14,10 +14,7 @@ The aim of this model is to construct a mask which excludes dynamic objects from
 
 <table>
   <tr>
-     <td>(A) Image without mask, (B) Image with mask has more False Negatives [Red: Full False Negative object, Orange: Partial False Negative object], (C) Image with mask has less False Negatives</td>
-  </tr>
-  <tr>
-    <td><img src="./Images/motivation_visualization.png" height=210 /></td>
+    <td><img src="./Images/motivation_visualization.png" height=360 /></td>
   </tr>
 </table>
 
@@ -25,9 +22,6 @@ The aim of this model is to construct a mask which excludes dynamic objects from
 The pipeline consists of three main blocks along with the pipeline entry and exit nodes. The binary segmentation task is performed by the “Binary Segmentation Block”, and the “Object Detection and Classification Block” is the responsible of enhancing its functionality. Lastly, “Comparison (Fusion) Block” takes the role of producing the model final mask.
 
 <table>
-  <tr>
-     <td>Model architecture</td>
-  </tr>
   <tr>
     <td><img src="./Images/model_arch.png" /></td>
   </tr>
@@ -42,10 +36,7 @@ The dataset labels were converted to binary version (_White: static elemnts, Bla
 
 <table>
   <tr>
-     <td>First column: inputimage, Second column: multi-calsses original label, Third columns binary (generated) original label.</td>
-  </tr>
-  <tr>
-    <td><img src="./Images/cam_vid.png" height=210 /></td>
+    <td><img src="./Images/cam_vid.png" height=360 /></td>
   </tr>
 </table>
 
@@ -61,14 +52,9 @@ The overall results show noticeable improvement for the "Mask accuracy"* with ac
 
 <table>
   <tr>
-     <td>Mask Accuracy Improvement</td>
-     <td>Map Accuracy Improvement</td>
-     <td>Average Mask and Map Accuracy Improvement</td>
-  </tr>
-  <tr>
-    <td><img src="./Images/mask_box_plot.png" height=210 /></td>
-    <td><img src="./Images/map_box_plot.png" height=210 /></td>
-    <td><img src="./Images/bar_plot.png" height=210 /></td>
+    <td><img src="./Images/mask_box_plot.png" height=360 /></td>
+    <td><img src="./Images/map_box_plot.png" height=360 /></td>
+    <td><img src="./Images/bar_plot.png" height=360 /></td>
   </tr>
 </table>
 
