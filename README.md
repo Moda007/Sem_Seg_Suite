@@ -45,10 +45,10 @@ The used models are _PSPNET_, _DeepLabV3+_, and _DenseASPP_.
 >Extra models can be implemented easily by checking the code of the previousely mentioned repo.
 
 ## Results:
-The overall results show noticeable improvement for the "Mask accuracy"* with acceptable degredation of the "Map accuracy"* , which led to cleaner and finer produced masks.
->* Each pixel in the image is either classified as a static or a quasi-static pixel. "Mask accuracy" evaluates how good is the mask in terms of detecting the quasi static (dynamic) objects, while "Map accuracy" measures the amount of information collected from the scene.
+The overall results show noticeable improvement for the "_Mask accuracy_" with acceptable degredation of the "_Map accuracy_", which led to cleaner and finer produced masks.
+>* Each pixel in the image is either classified as a static or a quasi-static pixel. "_Mask accuracy_" evaluates how good is the mask in terms of detecting the quasi static (dynamic) objects, while "_Map accuracy_" measures the amount of information collected from the scene.
 
->* "Mask accuracy" is the main KPI , due to the criticality of committing type II error by the model.
+>* "_Mask accuracy_" is the main KPI , due to the criticality of committing type II error by the model.
 
 <table>
   <tr>
