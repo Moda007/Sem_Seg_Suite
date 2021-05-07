@@ -1,6 +1,7 @@
-# Static Map Filter
+# STATIC-DYNAMIC SEGMENTATION OF IMAGE SEQUENCES VIA DEEP LEARNING
 
-This repo contains the code implementation for my MSc thesis: _* Static-dynamic segmentation of image sequences via deep learning *_
+
+This repo contains the code implementation for my MSc thesis: _Static-dynamic segmentation of image sequences via deep learning_
 
 > Thesis report will be published after discussion and graduation.
 
