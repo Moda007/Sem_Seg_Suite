@@ -29,11 +29,9 @@ def download_checkpoints(model_name):
     subprocess.check_output(["python", "/content/Sem_Seg_Suite/utils/get_pretrained_checkpoints.py", "--model=" + model_name])
 
 
-
 def build_model(model_name, net_input, num_classes, crop_width, crop_height, frontend="ResNet101", is_training=True):
 	# Get the selected model.
 	# Some of them require pre-trained ResNet
-
 	print("Preparing the model ...")
 
 	if model_name not in SUPPORTED_MODELS:
