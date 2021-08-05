@@ -28,6 +28,37 @@ The pipeline consists of three main blocks along with the pipeline entry and exi
   </tr>
 </table>
 
+### Comparison (Fusion) Block objective:
+This block is considered as the “Backbone” of the proposed model. This block receives the outputs from the Binary segmentation & the Object detection and classification blocks, two binary images, and examines on the input images (i.e. masks), aiming to develop the final mask. The examination calculates IoU, i.e. Intersection over Union, between every mask (box) that appears in the “DC Mask” and its analogous in “Seg Mask”. Three possible scenarios might be experienced by this block.
+
+<table>
+  <tr>
+    <td><img src="./Images/scenarios/three_scenarios.png" /></td>
+  </tr>
+</table>
+
+>* Scenario 1: Segmented correctly by Binary Segmentation Block and Not detected by Object Detection and Classification Block.
+>* Scenario 2: Missed by Binary Segmentation Block and Detected correctly by Object Detection and Classification Block.
+>* Scenario 3.a: Detected by Object Detection and Classification Block and Segmented by Binary Segmentation Block (_DC Mask is chosen_).
+>* Scenario 3.b: Detected by Object Detection and Classification Block and Segmented by Binary Segmentation Block  (_Seg Mask is chosen_).
+
+<table>
+  <tr>
+    <td><img src="./Images/scenarios/scenario_1.png" height=360 /></td>
+    <td><img src="./Images/scenarios/scenario_2.png" height=360 /></td>
+  </tr>
+  <tr>
+    <td><img src="./Images/scenarios/scenario_3_a.png" height=360 /></td>
+    <td><img src="./Images/scenarios/scenario_3_b.png" height=360 /></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td><img src="./Images/scenarios/final_mask.png" /></td>
+  </tr>
+</table>
+
 ## Datasets:
 The used datasets are CamVid, AugCamVid*, and Kitti360.
 >* AugCamVid: is an extended version of CamVid, after augmenting it by brightening, flipping, and the combination of both.
